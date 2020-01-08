@@ -111,6 +111,7 @@ function checkMode(){
   var newMode
   if(screenwidth<500){
     newMode=0
+    screenheight=window.innerHeight;
     updateHeight()
   }else if(screenwidth<=800 || screenheight>=1200){
     newMode=1
