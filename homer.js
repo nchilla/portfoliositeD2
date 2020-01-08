@@ -9,7 +9,7 @@ let vh = 1
 /*document.documentElement.style.setProperty('--vh', `${vh}px`);*/
 /*css-tricks.com/the-trick-to-viewport-units-on-mobile/*/
 function updateHeight(){
-  vh = window.innerHeight * 0.01;
+  vh = screenheight * 0.01;
   document.documentElement.style.setProperty('--vh', `${vh}px`);
   console.log('updated')
   container.style('height',vh)
@@ -111,7 +111,6 @@ function checkMode(){
   var newMode
   if(screenwidth<500){
     newMode=0
-    screenheight=window.innerHeight;
     updateHeight()
   }else if(screenwidth<=800 || screenheight>=1200){
     newMode=1
