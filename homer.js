@@ -21,11 +21,6 @@ function updateHeight(){
   console.log('---------------------------------------')
 }
 
-
-
-
-
-
 function resetGrid(){
   rows=d3.selectAll('.row')
   items=d3.selectAll('.item')
