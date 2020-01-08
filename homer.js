@@ -128,17 +128,19 @@ function resetGrid(){
 /*-----------end of update display-------------*/
 
 /*-----------mode check-------------*/
+var zeroMax=500
+var oneMax=900
 function checkMode(){
   screenwidth=window.innerWidth;
   screenheight=window.innerHeight;
   updateHeight()
   var newMode
-  if(screenwidth<500){
+  if(screenwidth<zeroMax){
     newMode=0
     updateHeight()
-  }else if(screenwidth<=800 || screenheight>=1200){
+  }else if(screenwidth<=oneMax || screenheight>=1200){
     newMode=1
-  }else if(screenwidth>800){
+  }else if(screenwidth>oneMax){
     newMode=2
   };
 
@@ -156,11 +158,11 @@ function checkModeMobile(){
   screenheight=window.innerHeight;
   updateHeight()
   var newMode
-  if(screenwidth<500){
+  if(screenwidth<zeroMax){
     newMode=0
-  }else if(screenwidth<=800 || screenheight>=1200){
+  }else if(screenwidth<=oneMax || screenheight>=1200){
     newMode=1
-  }else if(screenwidth>800){
+  }else if(screenwidth>oneMax){
     newMode=2
   };
 

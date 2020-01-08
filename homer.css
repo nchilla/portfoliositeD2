@@ -5,7 +5,7 @@
   --backback:#FFFF82;
   --toggleback:black/*#399E5A*/;
   --genreback:#FFFF82;
-  --projback:white/*#EE6352*/;
+  --projback:black/*#EE6352*/;
   --vh:1px;
 }
 /*-----------*/
@@ -72,18 +72,19 @@ height:100%;
 .b1{
   background-image: url(assets/bg1.jpg);
   background-size: cover;
-  background-position: center;
+  background-position:top
   background-repeat: no-repeat;
 }
 .b2{
   background-image: url(assets/bg2.jpg);
   background-size: cover;
-  background-position: center;
+  background-position: top;
   background-repeat: no-repeat;
 }
 .b3{
   background-image: url(assets/bg3.png);
   background-size: cover;
+  background-position: top;
   background-repeat: no-repeat;
 }
 /*end of projects*/
