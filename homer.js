@@ -3,7 +3,10 @@
 let vh = window.innerHeight * 0.01;
 document.documentElement.style.setProperty('--vh', `${vh}px`);
 /*css-tricks.com/the-trick-to-viewport-units-on-mobile/*/
-
+function updateHeight(){
+  vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty('--vh', `${vh}px`);
+}
 
 var mode=0;
 container=d3.select('#container')
@@ -116,6 +119,7 @@ function checkMode(){
     mode=newMode
     resetGrid();
   };
+  updateHeight()
   console.log(screenheight)
   console.log(mode)
   console.log(vh)
