@@ -230,5 +230,5 @@ function randomize(array){
 
 
 checkMode()
-window.addEventListener("devicemotion", checkMode, true);
+window.addEventListener("deviceorientation", checkMode, true);
 window.onresize=checkMode;
