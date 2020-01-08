@@ -124,9 +124,6 @@ function checkMode(){
     mode=newMode
     resetGrid();
   };
-  console.log(screenheight)
-  console.log(mode)
-  console.log(vh)
 } //end of checkMode
 
 function checkModeMobile(){
@@ -148,9 +145,7 @@ function checkModeMobile(){
     resetGrid();
   };
   updateHeight()
-  console.log(screenheight)
-  console.log(mode)
-  console.log(vh)
+
 } //end of checkModeMobile
 
 function accommodate9Block(array){
@@ -242,7 +237,6 @@ function accommodate6Block(array){
     } //end of switch
   }//end of arrange
   array.forEach(item=>arrange(item))
-  console.log(m0Blocks)
 }//end of accomodate9
 
 function randomize(array){
