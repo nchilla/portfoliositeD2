@@ -6,11 +6,11 @@ m2Blocks=['name','proj','back','exp','back','back','back','des','proj','pho','pr
 
 //credit to Louis Hoebregts at css tricks for responsive height tutorial
 let vh = window.innerHeight * 0.01;
-document.documentElement.style.setProperty('--vh', `${vh}px`);
+/*document.documentElement.style.setProperty('--vh', `${vh}px`);*/
 /*css-tricks.com/the-trick-to-viewport-units-on-mobile/*/
 function updateHeight(){
   vh = window.innerHeight * 0.01;
-  document.documentElement.style.setProperty('--vh', `${vh}px`);
+  /*document.documentElement.style.setProperty('--vh', `${vh}px`);*/
   console.log('updated')
 }
 
