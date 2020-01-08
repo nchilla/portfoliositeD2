@@ -128,6 +128,7 @@ function checkMode(){
 
 function checkModeMobile(){
   console.log('mobile mode check activated')
+  updateHeight()
   screenwidth=window.innerWidth;
   screenheight=window.innerHeight;
   var newMode
@@ -145,7 +146,7 @@ function checkModeMobile(){
     mode=newMode
     resetGrid();
   };
-  updateHeight()
+
 
 } //end of checkModeMobile
 
