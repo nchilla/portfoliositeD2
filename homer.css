@@ -1,14 +1,16 @@
+
+/*variable definitions*/
 :root {
   --nameback:black;
-  --backback:#08B2E3;
-  --toggleback:#399E5A;
+  --backback:#FFFF82;
+  --toggleback:black/*#399E5A*/;
   --genreback:#FFFF82;
-  --projback:#EE6352;
+  --projback:white/*#EE6352*/;
   --vh:1px;
 }
+/*-----------*/
 
-
-
+/*---essentials---*/
 #container{
   width:100%;
   height:100vh;
@@ -17,35 +19,18 @@
   position:fixed;
   flex-wrap:nowrap;
 }
-
 .row{
   flex:1;
   display: flex;
   flex-wrap:wrap;
 }
-
-
 .item{
   flex:1;
   position:relative;
-  outline:1px solid black;
+  border:1px solid black;
   outline-offset: -1px;
   overflow:hidden;
 }
-
-
-
-.specialitem{
-  flex:2;
-  position:relative;
-  outline:1px solid #345995;
-  outline-offset: -1px;
-}
-
-.name{
-  background-color: var(--nameback);
-}
-
 #name{
   color:white;
   font-family: neuzeit-grotesk,sans-serif;
@@ -59,16 +44,19 @@
   height:0px;
   overflow:visible;
 }
+.card{
+position:absolute;
+width:100%;
+height:100%;
+}
+/*---end of essentials----*/
 
+/*block identifiers*/
+.name{
+  background-color: var(--nameback);
+}
 .back{
   background-color: var(--backback);
-}
-
-.genretype{
-  background-color: var(--genreback);
-}
-.genre{
-  background-color: var(--genreback);
 }
 .proj{
   background-color: var(--projback);
@@ -77,8 +65,62 @@
   background-color: var(--toggleback);
   cursor:pointer;
 }
+/*end of block identifiers*/
 
 
+/*projects*/
+.b1{
+  background-image: url(assets/bg1.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.b2{
+  background-image: url(assets/bg2.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.b3{
+  background-image: url(assets/bg3.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+/*end of projects*/
+
+
+
+
+/*genre blocks*/
+.genretype{
+  background-color: var(--genreback);
+}
+.genre{
+  background-color: var(--genreback);
+}
+.genrehead{
+  font-family: neuzeit-grotesk, sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size:30px;
+  position:absolute;
+  bottom:7px;
+  right:10px;
+  color:black;
+}
+.des{
+}
+.ill{
+}
+.exp{
+}
+.pho{
+}
+
+/*endd of genre blocks*/
+
+
+/*name media queries*/
 @media (max-width:1000px) and (min-width:800px),(max-width:630px){
   #name{
     transform: rotate(-90deg);
@@ -88,7 +130,6 @@
     bottom:10px;
   }
 }
-
 @media (max-height:400px){
   #name{
     font-size:50px;
@@ -97,7 +138,6 @@
     bottom:99px;
   }
 }
-
 @media (max-height:600px) and (max-width:1000px) and (min-width:800px),(max-height:600px) and (max-width:630px){
   #name{
     font-size:50px;
@@ -107,3 +147,4 @@
     transform: rotate(0deg);
   }
 }
+/*end of name media queries*/

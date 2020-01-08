@@ -22,6 +22,7 @@ function updateHeight(){
   console.log('presumed height: '+container.style('height'))
   console.log('---------------------------------------')
 }
+
 function resetGrid(){
   rows=d3.selectAll('.row')
   items=d3.selectAll('.item')
@@ -33,7 +34,7 @@ function resetGrid(){
   r1=d3.select('.r1')
   r2=d3.select('.r2')
   r3=d3.select('.r3')
-
+  var bgcounter=0
   function insert(item,row){
     switch(item){
       case 'name':
@@ -43,6 +44,18 @@ function resetGrid(){
       break;
       case 'proj':
       row.append('div').attr("class","item proj")
+      .append('div')
+      .attr("class","temp")
+      var card=d3.select(this)
+      if (bgcounter==0){
+        d3.select('.temp').attr("class","card b1")
+        bgcounter+=1
+      }else if (bgcounter==1){
+        d3.select('.temp').attr("class","card b2")
+        bgcounter+=1
+      }else{
+        d3.select('.temp').attr("class","card b3")
+      }
       break;
       case 'toggle':
       row.append('div')
@@ -56,16 +69,24 @@ function resetGrid(){
       row.append('div').attr("class","item genre")
       break;
       case 'des':
-      row.append('div').attr("class","item genretype")
+      row.append('div').attr("class","item genretype des")
+      .append('div').attr("class","card")
+      .append('span').html('design').attr("class","genrehead")
       break;
       case 'ill':
-      row.append('div').attr("class","item genretype")
+      row.append('div').attr("class","item genretype ill")
+      .append('div').attr("class","card")
+      .append('span').html('illustration').attr("class","genrehead")
       break;
       case 'exp':
-      row.append('div').attr("class","item genretype")
+      row.append('div').attr("class","item genretype exp")
+      .append('div').attr("class","card")
+      .append('span').html('experiments').attr("class","genrehead")
       break;
       case 'pho':
-      row.append('div').attr("class","item genretype")
+      row.append('div').attr("class","item genretype pho")
+      .append('div').attr("class","card")
+      .append('span').html('photo').attr("class","genrehead")
       break;
       case 'last':
       row.append('div').attr("class","item back last")
