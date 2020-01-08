@@ -67,6 +67,9 @@
 .genretype{
   background-color: var(--genreback);
 }
+.genre{
+  background-color: var(--genreback);
+}
 .proj{
   background-color: var(--projback);
 }

@@ -1,3 +1,4 @@
+/*-----------definitions-------------*/
 var mode=3;
 var root=root = document.documentElement
 container=d3.select('#container')
@@ -5,12 +6,13 @@ var detectMobile=false
 m0Blocks=['name','proj','proj','genre','toggle','proj']
 m1Blocks=['name','proj','back','back','genre','toggle','proj','back','proj']
 m2Blocks=['name','proj','back','exp','back','back','back','des','proj','pho','proj','ill','back','toggle','last']
-
-//credit to Louis Hoebregts at css tricks for responsive height tutorial
 let vh = 1
-/*document.documentElement.style.setProperty('--vh', `${vh}px`);*/
-/*css-tricks.com/the-trick-to-viewport-units-on-mobile/*/
+/*-----------end of definitions-------------*/
+
+/*-----------update display-------------*/
 function updateHeight(){
+  //credit to Louis Hoebregts at css tricks for responsive height tutorial
+  /*css-tricks.com/the-trick-to-viewport-units-on-mobile/*/
   vh = screenheight
   root.style.setProperty('--vh', `${vh}px`)
   container.style('height',vh)
@@ -20,7 +22,6 @@ function updateHeight(){
   console.log('presumed height: '+container.style('height'))
   console.log('---------------------------------------')
 }
-
 function resetGrid(){
   rows=d3.selectAll('.row')
   items=d3.selectAll('.item')
@@ -103,7 +104,9 @@ function resetGrid(){
   } //end of switch
 
 } //end of function
+/*-----------end of update display-------------*/
 
+/*-----------mode check-------------*/
 function checkMode(){
   screenwidth=window.innerWidth;
   screenheight=window.innerHeight;
@@ -125,7 +128,6 @@ function checkMode(){
     resetGrid();
   };
 } //end of checkMode
-
 function checkModeMobile(){
   console.log('mobile mode check activated')
   detectMobile=true
@@ -148,7 +150,6 @@ function checkModeMobile(){
     resetGrid();
   };
 } //end of checkModeMobile
-
 function accommodate9Block(array){
   m1Blocks=[]
   var lever=true;
@@ -239,6 +240,20 @@ function accommodate6Block(array){
   }//end of arrange
   array.forEach(item=>arrange(item))
 }//end of accomodate9
+function checkModeMobile2(){
+  console.log('hm')
+  detectMobile=true
+  setTimeout(checkModeMobile, 1);
+} //end of checkModeMobile2
+function checkMode2(){
+if (detectMobile==false){
+  checkMode()
+}else{
+}
+}//end of checkMode2
+/*-----------end of mode check-------------*/
+
+
 
 function randomize(array){
   array.sort(function(a, b){return 0.5 - Math.random()});
@@ -246,19 +261,6 @@ function randomize(array){
   accommodate6Block(m1Blocks)
   resetGrid()
 }//end of randomize
-
-function checkModeMobile2(){
-  console.log('hm')
-  detectMobile=true
-  setTimeout(checkModeMobile, 1);
-} //end of checkModeMobile2
-
-function checkMode2(){
-if (detectMobile==false){
-  checkMode()
-}else{
-}
-}//end of checkMode2
 
 checkMode()
 window.addEventListener("deviceorientation", checkModeMobile2, true);
