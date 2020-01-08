@@ -5,7 +5,7 @@ m1Blocks=['name','proj','back','back','genre','toggle','proj','back','proj']
 m2Blocks=['name','proj','back','exp','back','back','back','des','proj','pho','proj','ill','back','toggle','last']
 
 //credit to Louis Hoebregts at css tricks for responsive height tutorial
-let vh = window.innerHeight * 0.01;
+let vh = 1
 /*document.documentElement.style.setProperty('--vh', `${vh}px`);*/
 /*css-tricks.com/the-trick-to-viewport-units-on-mobile/*/
 function updateHeight(){
