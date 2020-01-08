@@ -127,6 +127,7 @@ function checkMode(){
 } //end of checkMode
 
 function checkModeMobile(){
+  console.log('mobile mode check activated')
   screenwidth=window.innerWidth;
   screenheight=window.innerHeight;
   var newMode
