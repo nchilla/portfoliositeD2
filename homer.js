@@ -1,5 +1,7 @@
 var mode=3;
+var root=root = document.documentElement
 container=d3.select('#container')
+var detectMobile=false
 m0Blocks=['name','proj','proj','genre','toggle','proj']
 m1Blocks=['name','proj','back','back','genre','toggle','proj','back','proj']
 m2Blocks=['name','proj','back','exp','back','back','back','des','proj','pho','proj','ill','back','toggle','last']
@@ -10,11 +12,13 @@ let vh = 1
 /*css-tricks.com/the-trick-to-viewport-units-on-mobile/*/
 function updateHeight(){
   vh = screenheight
-  document.documentElement.style.setProperty('--vh', `${vh}px`);
-  console.log('updated')
+  root.style.setProperty('--vh', `${vh}px`)
   container.style('height',vh)
+  document.getElementById('container').style.height='var(--vh)'
+  console.log('vh: '+vh)
+  console.log('screenheight: '+screenheight)
   console.log('presumed height: '+container.style('height'))
-  document.getElementById('container').style.height='var(--vh, 1vh)'
+  console.log('---------------------------------------')
 }
 
 
@@ -128,9 +132,10 @@ function checkMode(){
 
 function checkModeMobile(){
   console.log('mobile mode check activated')
-  updateHeight()
+  detectMobile=true
   screenwidth=window.innerWidth;
   screenheight=window.innerHeight;
+  updateHeight()
   var newMode
   if(screenwidth<500){
     newMode=0
@@ -146,8 +151,6 @@ function checkModeMobile(){
     mode=newMode
     resetGrid();
   };
-
-
 } //end of checkModeMobile
 
 function accommodate9Block(array){
@@ -248,9 +251,19 @@ function randomize(array){
   resetGrid()
 }//end of randomize
 
+function checkModeMobile2(){
+  detectMobile=true
+  setTimeout(checkModeMobile, 1);
+} //end of checkModeMobile2
 
+function checkMode2(){
+if (detectMobile==false){
+  checkMode()
+}else{
+}
+}//end of checkMode2
 
 checkMode()
-window.addEventListener("deviceorientation", checkModeMobile, true);
-window.addEventListener("orientationchange", checkModeMobile);
+window.addEventListener("deviceorientation", checkModeMobile2, true);
+window.addEventListener("orientationchange", checkModeMobile2);
 window.onresize=checkMode;
