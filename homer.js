@@ -1,3 +1,10 @@
+
+//credit to Louis Hoebregts at css tricks for responsive height tutorial
+let vh = window.innerHeight * 0.01;
+document.documentElement.style.setProperty('--vh', `${vh}px`);
+/*css-tricks.com/the-trick-to-viewport-units-on-mobile/*/
+
+
 var mode=0;
 container=d3.select('#container')
 m0Blocks=['name','proj','proj','genre','toggle','proj']
@@ -212,6 +219,8 @@ function randomize(array){
   accommodate6Block(m1Blocks)
   resetGrid()
 }//end of randomize
+
+
 
 checkMode()
 window.onresize=checkMode;
