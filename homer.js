@@ -10,8 +10,9 @@ let vh = window.innerHeight * 0.01;
 /*css-tricks.com/the-trick-to-viewport-units-on-mobile/*/
 function updateHeight(){
   vh = window.innerHeight * 0.01;
-  /*document.documentElement.style.setProperty('--vh', `${vh}px`);*/
+  document.documentElement.style.setProperty('--vh', `${vh}px`);
   console.log('updated')
+  d3.select('#container').style('height',vh)
 }
 
 
@@ -108,6 +109,30 @@ function checkMode(){
   var newMode
   if(screenwidth<500){
     newMode=0
+    updateHeight()
+  }else if(screenwidth<=800 || screenheight>=1200){
+    newMode=1
+  }else if(screenwidth>800){
+    newMode=2
+  };
+
+  if (newMode==mode){
+    return;
+  }else{
+    mode=newMode
+    resetGrid();
+  };
+  console.log(screenheight)
+  console.log(mode)
+  console.log(vh)
+} //end of checkMode
+
+function checkModeMobile(){
+  screenwidth=window.innerWidth;
+  screenheight=window.innerHeight;
+  var newMode
+  if(screenwidth<500){
+    newMode=0
   }else if(screenwidth<=800 || screenheight>=1200){
     newMode=1
   }else if(screenwidth>800){
@@ -124,8 +149,7 @@ function checkMode(){
   console.log(screenheight)
   console.log(mode)
   console.log(vh)
-} //end of function
-
+} //end of checkModeMobile
 
 function accommodate9Block(array){
   m1Blocks=[]
@@ -229,6 +253,6 @@ function randomize(array){
 
 
 checkMode()
-window.addEventListener("deviceorientation", checkMode, true);
-window.addEventListener("orientationchange", checkMode);
+window.addEventListener("deviceorientation", checkModeMobile, true);
+window.addEventListener("orientationchange", checkModeMobile);
 window.onresize=checkMode;
