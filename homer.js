@@ -13,6 +13,7 @@ function updateHeight(){
   document.documentElement.style.setProperty('--vh', `${vh}px`);
   console.log('updated')
   container.style('height',vh)
+  document.getElementById('container').style.height=vh
 }
 
 
