@@ -1,3 +1,8 @@
+var mode=3;
+container=d3.select('#container')
+m0Blocks=['name','proj','proj','genre','toggle','proj']
+m1Blocks=['name','proj','back','back','genre','toggle','proj','back','proj']
+m2Blocks=['name','proj','back','exp','back','back','back','des','proj','pho','proj','ill','back','toggle','last']
 
 //credit to Louis Hoebregts at css tricks for responsive height tutorial
 let vh = window.innerHeight * 0.01;
@@ -8,11 +13,6 @@ function updateHeight(){
   document.documentElement.style.setProperty('--vh', `${vh}px`);
 }
 
-var mode=3;
-container=d3.select('#container')
-m0Blocks=['name','proj','proj','genre','toggle','proj']
-m1Blocks=['name','proj','back','back','genre','toggle','proj','back','proj']
-m2Blocks=['name','proj','back','exp','back','back','back','des','proj','pho','proj','ill','back','toggle','last']
 
 
 
