@@ -8,7 +8,7 @@ function updateHeight(){
   document.documentElement.style.setProperty('--vh', `${vh}px`);
 }
 
-var mode=0;
+var mode=3;
 container=d3.select('#container')
 m0Blocks=['name','proj','proj','genre','toggle','proj']
 m1Blocks=['name','proj','back','back','genre','toggle','proj','back','proj']
