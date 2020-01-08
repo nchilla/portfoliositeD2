@@ -112,6 +112,7 @@ function resetGrid(){
 function checkMode(){
   screenwidth=window.innerWidth;
   screenheight=window.innerHeight;
+  updateHeight()
   var newMode
   if(screenwidth<500){
     newMode=0
@@ -252,6 +253,7 @@ function randomize(array){
 }//end of randomize
 
 function checkModeMobile2(){
+  console.log('hm')
   detectMobile=true
   setTimeout(checkModeMobile, 1);
 } //end of checkModeMobile2
