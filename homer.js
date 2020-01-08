@@ -9,12 +9,12 @@ let vh = 1
 /*document.documentElement.style.setProperty('--vh', `${vh}px`);*/
 /*css-tricks.com/the-trick-to-viewport-units-on-mobile/*/
 function updateHeight(){
-  vh = screenheight * 0.01;
+  vh = screenheight
   document.documentElement.style.setProperty('--vh', `${vh}px`);
   console.log('updated')
   container.style('height',vh)
   console.log('presumed height: '+container.style('height'))
-  document.getElementById('container').style.height='calc(var(--vh, 1vh) * 100)'
+  document.getElementById('container').style.height='var(--vh, 1vh)'
 }
 
 
