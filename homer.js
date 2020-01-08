@@ -14,7 +14,7 @@ function updateHeight(){
   console.log('updated')
   container.style('height',vh)
   console.log('presumed height: '+container.style('height'))
-  document.getElementById('container').style.height='var(--vh)'
+  document.getElementById('container').style.height='calc(var(--vh, 1vh) * 100)'
 }
 
 
