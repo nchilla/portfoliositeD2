@@ -12,7 +12,7 @@ function updateHeight(){
   vh = window.innerHeight * 0.01;
   document.documentElement.style.setProperty('--vh', `${vh}px`);
   console.log('updated')
-  d3.select('#container').style('height',vh)
+  container.style('height',vh)
 }
 
 
