@@ -118,6 +118,7 @@ function checkMode(){
   };
   console.log(screenheight)
   console.log(mode)
+  console.log(vh)
 } //end of function
 
 
