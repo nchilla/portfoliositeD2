@@ -31,7 +31,7 @@
   outline-offset: -1px;
   overflow:hidden;
 }
-#name{
+#nametype{
   color:white;
   font-family: neuzeit-grotesk,sans-serif;
   font-weight: 900;
@@ -69,31 +69,25 @@ height:100%;
 
 
 /*projects*/
-.b1{
-  background-image: url(assets/bg1.jpg);
-  background-size: cover;
-  background-position:top;
-  background-repeat: no-repeat;
-  
+.thumb{
+  width:100%;
+  height:auto;
 }
-.b2{
-  background-image: url(assets/bg2.jpg);
-  background-size: cover;
-  background-position: top;
-  background-repeat: no-repeat;
 
+.projdesc{
+  background-color:var(--backback);
+  width:calc(100% - 10px);
+  height:30px;
+  border-top:2px solid black;
+  font-family: 'Fira Code', monospace;
+  font-size:15px;
+  line-height: 19px;
+  position:absolute;
+  bottom:0;
+  padding-left: 10px;
 }
-.b3{
-  background-image: url(assets/bg3.png);
-  background-size: cover;
-  background-position: top;
-  background-repeat: no-repeat;
 
-}
 /*end of projects*/
-
-
-
 
 /*genre blocks*/
 .genretype{
@@ -126,7 +120,7 @@ height:100%;
 
 /*name media queries*/
 @media (max-width:1000px) and (min-width:800px),(max-width:630px){
-  #name{
+  #nametype{
     transform: rotate(-90deg);
     width:0px;
     right:130px;
@@ -135,7 +129,7 @@ height:100%;
   }
 }
 @media (max-height:400px){
-  #name{
+  #nametype{
     font-size:50px;
     line-height:45px;
     left:15px;
@@ -143,7 +137,7 @@ height:100%;
   }
 }
 @media (max-height:600px) and (max-width:1000px) and (min-width:800px),(max-height:600px) and (max-width:630px){
-  #name{
+  #nametype{
     font-size:50px;
     line-height:45px;
     left:15px;

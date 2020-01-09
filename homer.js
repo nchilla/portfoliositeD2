@@ -1,12 +1,24 @@
-/*-----------definitions-------------*/
+/*---PHP gets---*/
+var proj0='assets/bg1.jpg'
+var p0title="NSFP Illustration"
+var proj1='assets/bg2.jpg'
+var p1title="NYC Photography"
+var proj2='assets/bg3.png'
+var p2title="NSFP Magazine November 2019"
+
+/*---end of PHP gets---*/
+
+/*-----------starting definitions-------------*/
 var mode=3;
 var root=root = document.documentElement
 container=d3.select('#container')
 var detectMobile=false
 m0Blocks=['name','proj','proj','genre','toggle','proj']
 m1Blocks=['name','proj','back','back','genre','toggle','proj','back','proj']
-m2Blocks=['name','proj','back','exp','back','back','back','des','proj','pho','proj','ill','back','toggle','last']
+m2Blocks=['name','proj','back','exp','back','back','back','des','proj','pho','proj','ill','back','toggle','back']
 let vh = 1
+var capHeight="30"
+
 /*-----------end of definitions-------------*/
 
 /*-----------update display-------------*/
@@ -17,13 +29,87 @@ function updateHeight(){
   root.style.setProperty('--vh', `${vh}px`)
   container.style('height',vh)
   document.getElementById('container').style.height='var(--vh)'
-  console.log('vh: '+vh)
-  console.log('screenheight: '+screenheight)
-  console.log('presumed height: '+container.style('height'))
-  console.log('---------------------------------------')
+}
+
+function imgCaption(){
+  num0=d3.select('.num0').node().getBoundingClientRect()
+  if ((num0.height-30)>num0.width){
+    capHeight=num0.height-num0.width
+    d3.selectAll('.projdesc').style("line-height","19px")
+    d3.selectAll('.projdesc').style("padding-top","10px")
+  }else{
+    capHeight=30
+    d3.selectAll('.projdesc').style("line-height","30px")
+    d3.selectAll('.projdesc').style("padding-top","0px")
+  }
+  d3.selectAll('.projdesc').style("height",capHeight+"px")
 }
 
 function resetGrid(){
+  var blockCounter=0
+  var cardCounter=0
+  var projCounter=0
+  var block;
+  var card;
+
+  function blockAdder(item,row,counter){
+    var identifier="block"+counter
+    row.append('div')
+    .attr("class","item "+item)
+    .attr("id",identifier)
+    block=d3.select("#"+identifier)
+  }
+
+  function cardAdder(){
+    cardNum='num'+cardCounter
+    block.append('div')
+    .classed("card",true)
+    .classed(cardNum,true)
+    card=d3.select("."+cardNum)
+    cardCounter+=1
+  }
+
+  function imgAdder(){
+    cardAdder()
+    switch (projCounter){
+      case 0:
+      card.append('img')
+      .classed("thumb",true)
+      .attr('src',proj0)
+      break;
+      case 1:
+      card.append('img')
+      .classed("thumb",true)
+      .attr('src',proj1)
+      break;
+      case 2:
+      card.append('img')
+      .classed("thumb",true)
+      .attr('src',proj2)
+      break;
+    }
+
+    cardAdder()
+    switch (projCounter){
+      case 0:
+      card.append("div")
+      .classed("projdesc",true)
+      .html(p0title)
+      break;
+      case 1:
+      card.append("div")
+      .classed("projdesc",true)
+      .html(p1title)
+      break;
+      case 2:
+      card.append("div")
+      .classed("projdesc",true)
+      .html(p2title)
+      break;
+    }
+    projCounter+=1
+  }
+
   rows=d3.selectAll('.row')
   items=d3.selectAll('.item')
   rows.remove();
@@ -34,64 +120,54 @@ function resetGrid(){
   r1=d3.select('.r1')
   r2=d3.select('.r2')
   r3=d3.select('.r3')
-  var bgcounter=0
+
   function insert(item,row){
     switch(item){
       case 'name':
-      row.append('div').attr("class","item name")
-      .append('div').attr('id','name')
+      blockAdder(item,row,blockCounter)
+      block.append('div').attr('id','nametype')
       .append('p').html('Nico<br>Chilla')
       break;
       case 'proj':
-      row.append('div').attr("class","item proj")
-      .append('div')
-      .attr("class","temp")
-      var card=d3.select(this)
-      if (bgcounter==0){
-        d3.select('.temp').attr("class","card b1")
-        bgcounter+=1
-      }else if (bgcounter==1){
-        d3.select('.temp').attr("class","card b2")
-        bgcounter+=1
-      }else{
-        d3.select('.temp').attr("class","card b3")
-      }
+      blockAdder(item,row,blockCounter)
+      imgAdder()
       break;
       case 'toggle':
-      row.append('div')
-      .attr("class","item toggle")
-      .attr("onclick","randomize(m2Blocks);")
+      blockAdder(item,row,blockCounter)
+      block.attr("onclick","randomize(m2Blocks);")
       break;
       case 'back':
-      row.append('div').attr("class","item back")
+      blockAdder(item,row,blockCounter)
       break;
       case 'genre':
-      row.append('div').attr("class","item genre")
+      blockAdder(item,row,blockCounter)
       break;
       case 'des':
-      row.append('div').attr("class","item genretype des")
-      .append('div').attr("class","card")
-      .append('span').html('design').attr("class","genrehead")
+      blockAdder(item,row,blockCounter)
+      block.classed("genretype",true)
+      cardAdder()
+      card.append('span').html('design').attr("class","genrehead")
       break;
       case 'ill':
-      row.append('div').attr("class","item genretype ill")
-      .append('div').attr("class","card")
-      .append('span').html('illustration').attr("class","genrehead")
+      blockAdder(item,row,blockCounter)
+      block.classed("genretype",true)
+      cardAdder()
+      card.append('span').html('illustration').attr("class","genrehead")
       break;
       case 'exp':
-      row.append('div').attr("class","item genretype exp")
-      .append('div').attr("class","card")
-      .append('span').html('experiments').attr("class","genrehead")
+      blockAdder(item,row,blockCounter)
+      block.classed("genretype",true)
+      cardAdder()
+      card.append('span').html('experiments').attr("class","genrehead")
       break;
       case 'pho':
-      row.append('div').attr("class","item genretype pho")
-      .append('div').attr("class","card")
-      .append('span').html('photo').attr("class","genrehead")
-      break;
-      case 'last':
-      row.append('div').attr("class","item back last")
+      blockAdder(item,row,blockCounter)
+      block.classed("genretype",true)
+      cardAdder()
+      card.append('span').html('photo').attr("class","genrehead")
       break;
     } //end of switch
+    blockCounter+=1
   }
 
   switch(mode){
@@ -123,7 +199,8 @@ function resetGrid(){
     break;
 
   } //end of switch
-
+blockCounter=0
+imgCaption()
 } //end of function
 /*-----------end of update display-------------*/
 
@@ -152,7 +229,6 @@ function checkMode(){
   };
 } //end of checkMode
 function checkModeMobile(){
-  console.log('mobile mode check activated')
   detectMobile=true
   screenwidth=window.innerWidth;
   screenheight=window.innerHeight;
@@ -173,6 +249,7 @@ function checkModeMobile(){
     resetGrid();
   };
 } //end of checkModeMobile
+
 function accommodate9Block(array){
   m1Blocks=[]
   var lever=true;
@@ -264,7 +341,6 @@ function accommodate6Block(array){
   array.forEach(item=>arrange(item))
 }//end of accomodate9
 function checkModeMobile2(){
-  console.log('hm')
   detectMobile=true
   setTimeout(checkModeMobile, 1);
 } //end of checkModeMobile2
@@ -274,7 +350,21 @@ if (detectMobile==false){
 }else{
 }
 }//end of checkMode2
+
+
+function listenerCall(){
+  imgCaption()
+  checkMode2()
+}
+
+function listenerCallMobile(){
+  imgCaption()
+  checkModeMobile2()
+}
 /*-----------end of mode check-------------*/
+
+
+
 
 
 
@@ -286,6 +376,6 @@ function randomize(array){
 }//end of randomize
 
 checkMode()
-window.addEventListener("deviceorientation", checkModeMobile2, true);
-window.addEventListener("orientationchange", checkModeMobile2);
-window.onresize=checkMode;
+window.addEventListener("deviceorientation", listenerCallMobile, true);
+window.addEventListener("orientationchange", listenerCallMobile);
+window.onresize=listenerCall;
