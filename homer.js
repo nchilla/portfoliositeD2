@@ -359,6 +359,7 @@ function listenerCall(){
 
 function listenerCallMobile(){
   checkModeMobile2()
+  console.log('fired')
   imgCaption()
 }
 /*-----------end of mode check-------------*/
