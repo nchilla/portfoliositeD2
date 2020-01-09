@@ -346,7 +346,7 @@ function checkModeMobile2(){
 } //end of checkModeMobile2
 function checkMode2(){
 if (detectMobile==false){
-  setTimeout(checkMode, 1);
+  setTimeout(checkMode, 100);
 }else{
 }
 }//end of checkMode2
