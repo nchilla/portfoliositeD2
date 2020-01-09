@@ -353,13 +353,13 @@ if (detectMobile==false){
 
 
 function listenerCall(){
-  imgCaption()
   checkMode2()
+  imgCaption()
 }
 
 function listenerCallMobile(){
-  imgCaption()
   checkModeMobile2()
+  imgCaption()
 }
 /*-----------end of mode check-------------*/
 
