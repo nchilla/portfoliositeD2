@@ -351,9 +351,8 @@ if (detectMobile==false){
 }
 }//end of checkMode2
 
-
 function listenerCall(){
-  checkMode2()
+  checkMode()
   imgCaption()
 }
 
@@ -364,11 +363,6 @@ function listenerCallMobile(){
 }
 /*-----------end of mode check-------------*/
 
-
-
-
-
-
 function randomize(array){
   array.sort(function(a, b){return 0.5 - Math.random()});
   accommodate9Block(m2Blocks)
@@ -376,7 +370,7 @@ function randomize(array){
   resetGrid()
 }//end of randomize
 
-checkMode()
+listenerCall()
 window.addEventListener("deviceorientation", listenerCallMobile, true);
 window.addEventListener("orientationchange", listenerCallMobile);
 window.onresize=listenerCall;
