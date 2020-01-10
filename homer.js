@@ -16,11 +16,16 @@ var detectMobile=false
 m0Blocks=['name','proj','proj','genre','toggle','proj']
 m1Blocks=['name','proj','back','back','genre','toggle','proj','back','proj']
 m2Blocks=['name','proj','back','exp','back','back','back','des','proj','pho','proj','ill','back','toggle','back']
+/*m2Blocks=['name','des','ill','exp','pho','back','proj','proj','proj','toggle','back','back','back','back','back']*/
 let vh = 1
 var capHeight="30"
+var backArr=["A","B","C","D","E"]
 
 /*-----------end of starting definitions-------------*/
 
+/*Static SVGs*/
+var arrow='<svg xmlns="http://www.w3.org/2000/svg" class="arrow" viewBox="0 0 102.61 70.2"><polyline points="0.8 69.6 51.3 1.68 101.8 69.6"/></svg>'
+console.log(arrow)
 /*-----------update display-------------*/
 function updateHeight(){
   //credit to Louis Hoebregts at css tricks for responsive height tutorial
@@ -29,6 +34,13 @@ function updateHeight(){
   root.style.setProperty('--vh', `${vh}px`)
   container.style('height',vh)
   document.getElementById('container').style.height='var(--vh)'
+}
+
+function updateSVG(){
+  cardheight=d3.select('.card').node().getBoundingClientRect().height
+  root.style.setProperty('--cardheight',d3.select('.card').node().getBoundingClientRect().height)
+  d3.selectAll('.resvg').style("height",cardheight)
+  console.log('card height: '+cardheight)
 }
 
 function imgCaption(){
@@ -51,7 +63,7 @@ function resetGrid(){
   var projCounter=0
   var block;
   var card;
-  var svg;
+  var backSpread=[...backArr]
 
   function blockAdder(item,row,counter){
     var identifier="block"+counter
@@ -112,26 +124,72 @@ function resetGrid(){
   }
 
   function svgAdder(){
+    console.log('backArr: '+backArr)
+    console.log('backSpread: '+backSpread)
     cardAdder()
-    card.append('svg')
-    svg=d3.select('.'+cardNum).select('svg')
-    svg.style('width','100%')
-    .style('height','100%')
-    .append("line")
-    .attr("x1", '0%')
-    .attr("x2", '100%')
-    .attr("y1", '0%')
-    .attr("y2", "100%")
-    .attr("stroke", "var(--outlinecolor)")
-    .attr("stroke-width", "2px")
-    svg
-    .append("line")
-    .attr("x1", '100%')
-    .attr("x2", '0%')
-    .attr("y1", '0%')
-    .attr("y2", "100%")
-    .attr("stroke", "var(--outlinecolor)")
-    .attr("stroke-width", "2px")
+    card.classed('texture',true)
+    if (block.attr("id")=="block14"){
+
+    }else{
+      switch(backSpread[0]){
+        case "A":
+        card.append('svg').classed('resvg',true)
+        svg=d3.select('.'+cardNum).select('svg')
+        svg
+        .append("line")
+        .classed('line',true)
+        .attr("x1", '0%')
+        .attr("x2", '100%')
+        .attr("y1", '0%')
+        .attr("y2", "100%")
+        svg
+        .append("line")
+        .classed('line',true)
+        .attr("x1", '100%')
+        .attr("x2", '0%')
+        .attr("y1", '0%')
+        .attr("y2", "100%")
+        break;
+
+        case "B":
+        card.append('svg').classed('resvg',true)
+        svg=d3.select('.'+cardNum).select('svg')
+        svg.append("line")
+        .classed('line',true)
+        .attr("x1", '25%')
+        .attr("x2", '25%')
+        .attr("y1", '25%')
+        .attr("y2", "75%")
+        svg.append("line")
+        .classed('line',true)
+        .attr("x1", '50%')
+        .attr("x2", '50%')
+        .attr("y1", '25%')
+        .attr("y2", "75%")
+
+        svg.append("line")
+        .classed('line',true)
+        .attr("x1", '75%')
+        .attr("x2", '75%')
+        .attr("y1", '25%')
+        .attr("y2", "75%")
+
+        card.append('div').classed('arrow1',true).html(arrow)
+        card.append('div').classed('arrow2',true).html(arrow)
+        card.append('div').classed('arrow3',true).html(arrow)
+
+        break;
+
+        case "C":
+        break;
+        case "D":
+        break;
+        case "E":
+        break;
+      }//end of switch
+    }//end of if-statement
+
+    backSpread.splice(0,1)
   }
 
   rows=d3.selectAll('.row')
@@ -226,7 +284,8 @@ function resetGrid(){
   } //end of switch
 blockCounter=0
 imgCaption()
-} //end of function
+updateSVG()
+} //end of resetGrid
 /*-----------end of update display-------------*/
 
 /*-----------mode check-------------*/
@@ -379,12 +438,14 @@ if (detectMobile==false){
 function listenerCall(){
   checkMode()
   imgCaption()
+  updateSVG()
 }
 
 function listenerCallMobile(){
   checkModeMobile2()
   console.log('fired')
   imgCaption()
+  updateSVG()
 }
 /*-----------end of mode check-------------*/
 
@@ -392,6 +453,7 @@ function randomize(array){
   array.sort(function(a, b){return 0.5 - Math.random()});
   accommodate9Block(m2Blocks)
   accommodate6Block(m1Blocks)
+  backArr.sort(function(a, b){return 0.5 - Math.random()});
   resetGrid()
 }//end of randomize
 

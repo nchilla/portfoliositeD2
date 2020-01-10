@@ -5,6 +5,7 @@
   --backcolor:#FFFF82;
   --outlinecolor: black;
   --vh:1px;
+  --cardheight:1;
 }
 /*-----------*/
 
@@ -48,6 +49,11 @@ position:absolute;
 width:100%;
 height:100%;
 }
+.smallheading{
+  font-family: 'Fira Code', monospace;
+  font-size:15px;
+  line-height:19px;
+}
 /*---end of essentials----*/
 
 /*block identifiers*/
@@ -61,7 +67,7 @@ height:100%;
   background-color: var(--solidback);
 }
 .toggle{
-  background-color: var(--solidback);
+  background-color: var(--backcolor);
   cursor:pointer;
 }
 /*end of block identifiers*/
@@ -116,6 +122,44 @@ height:100%;
 
 /*endd of genre blocks*/
 
+/*background texture*/
+.resvg{
+  width:100%;
+}
+.line{
+  stroke:var(--outlinecolor);
+  stroke-width:2px;
+}
+
+.arrow{
+  stroke:black;
+  stroke-width:6px;
+  fill:none;
+}
+
+.arrow1{
+  position:absolute;
+  top:calc(25% - 1px);
+  left:calc(25% - 15px);
+  width:30px;
+  height:30px;
+}
+.arrow2{
+  position:absolute;
+  top:calc(25% - 1px);
+  left:calc(50% - 15px);
+  width:30px;
+  height:30px;
+}
+.arrow3{
+  position:absolute;
+  top:calc(25% - 1px);
+  left:calc(75% - 15px);
+  width:30px;
+  height:30px;
+}
+
+/*end of background texture*/
 
 /*name media queries*/
 @media (max-width:1000px) and (min-width:800px),(max-width:630px){
