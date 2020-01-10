@@ -1,14 +1,13 @@
 
 /*variable definitions*/
 :root {
-  --nameback:black;
-  --backback:#FFFF82;
-  --toggleback:black/*#399E5A*/;
-  --genreback:#FFFF82;
-  --projback:black/*#EE6352*/;
+  --solidback:black;
+  --backcolor:#FFFF82;
+  --outlinecolor: black;
   --vh:1px;
 }
 /*-----------*/
+
 
 /*---essentials---*/
 #container{
@@ -27,7 +26,7 @@
 .item{
   flex:1;
   position:relative;
-  border:1px solid black;
+  border:1px solid var(--outlinecolor);
   outline-offset: -1px;
   overflow:hidden;
 }
@@ -53,16 +52,16 @@ height:100%;
 
 /*block identifiers*/
 .name{
-  background-color: var(--nameback);
+  background-color: var(--solidback);
 }
 .back{
-  background-color: var(--backback);
+  background-color: var(--backcolor);
 }
 .proj{
-  background-color: var(--projback);
+  background-color: var(--solidback);
 }
 .toggle{
-  background-color: var(--toggleback);
+  background-color: var(--solidback);
   cursor:pointer;
 }
 /*end of block identifiers*/
@@ -75,10 +74,10 @@ height:100%;
 }
 
 .projdesc{
-  background-color:var(--backback);
+  background-color:var(--backcolor);
   width:calc(100% - 10px);
   height:30px;
-  border-top:2px solid black;
+  border-top:2px solid var(--outlinecolor);
   font-family: 'Fira Code', monospace;
   font-size:15px;
   line-height: 19px;
@@ -91,10 +90,10 @@ height:100%;
 
 /*genre blocks*/
 .genretype{
-  background-color: var(--genreback);
+  background-color: var(--backcolor);
 }
 .genre{
-  background-color: var(--genreback);
+  background-color: var(--backcolor);
 }
 .genrehead{
   font-family: neuzeit-grotesk, sans-serif;
@@ -104,7 +103,7 @@ height:100%;
   position:absolute;
   bottom:7px;
   right:10px;
-  color:black;
+  color:var(--outlinecolor);
 }
 .des{
 }

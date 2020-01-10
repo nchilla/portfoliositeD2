@@ -19,7 +19,7 @@ m2Blocks=['name','proj','back','exp','back','back','back','des','proj','pho','pr
 let vh = 1
 var capHeight="30"
 
-/*-----------end of definitions-------------*/
+/*-----------end of starting definitions-------------*/
 
 /*-----------update display-------------*/
 function updateHeight(){
@@ -51,6 +51,7 @@ function resetGrid(){
   var projCounter=0
   var block;
   var card;
+  var svg;
 
   function blockAdder(item,row,counter){
     var identifier="block"+counter
@@ -110,6 +111,29 @@ function resetGrid(){
     projCounter+=1
   }
 
+  function svgAdder(){
+    cardAdder()
+    card.append('svg')
+    svg=d3.select('.'+cardNum).select('svg')
+    svg.style('width','100%')
+    .style('height','100%')
+    .append("line")
+    .attr("x1", '0%')
+    .attr("x2", '100%')
+    .attr("y1", '0%')
+    .attr("y2", "100%")
+    .attr("stroke", "var(--outlinecolor)")
+    .attr("stroke-width", "2px")
+    svg
+    .append("line")
+    .attr("x1", '100%')
+    .attr("x2", '0%')
+    .attr("y1", '0%')
+    .attr("y2", "100%")
+    .attr("stroke", "var(--outlinecolor)")
+    .attr("stroke-width", "2px")
+  }
+
   rows=d3.selectAll('.row')
   items=d3.selectAll('.item')
   rows.remove();
@@ -138,6 +162,7 @@ function resetGrid(){
       break;
       case 'back':
       blockAdder(item,row,blockCounter)
+      svgAdder()
       break;
       case 'genre':
       blockAdder(item,row,blockCounter)
