@@ -14,18 +14,17 @@ var root=root = document.documentElement
 container=d3.select('#container')
 var detectMobile=false
 m0Blocks=['name','proj','proj','genre','toggle','proj']
-m1Blocks=['name','proj','back','back','genre','toggle','proj','back','proj']
+m1Blocks=['name','genre','toggle','back','back','back','proj','proj','proj']
 m2Blocks=['name','proj','back','exp','back','back','back','des','proj','pho','proj','ill','back','toggle','back']
-/*m2Blocks=['name','des','ill','exp','pho','back','proj','proj','proj','toggle','back','back','back','back','back']*/
+m2Blocks=['name','des','ill','exp','pho','back','proj','proj','proj','toggle','back','back','back','back','back']
 let vh = 1
 var capHeight="30"
-var backArr=["A","B","C","D","E"]
+var backArr=["B","A","C","D","E"]
 
 /*-----------end of starting definitions-------------*/
 
 /*Static SVGs*/
 var arrow='<svg xmlns="http://www.w3.org/2000/svg" class="arrow" viewBox="0 0 102.61 70.2"><polyline points="0.8 69.6 51.3 1.68 101.8 69.6"/></svg>'
-console.log(arrow)
 /*-----------update display-------------*/
 function updateHeight(){
   //credit to Louis Hoebregts at css tricks for responsive height tutorial
@@ -37,10 +36,8 @@ function updateHeight(){
 }
 
 function updateSVG(){
-  cardheight=d3.select('.card').node().getBoundingClientRect().height
-  root.style.setProperty('--cardheight',d3.select('.card').node().getBoundingClientRect().height)
-  d3.selectAll('.resvg').style("height",cardheight)
-  console.log('card height: '+cardheight)
+  cardheight=d3.select('.textureborder').node().getBoundingClientRect().height-4
+  d3.selectAll('.resvg').style("height",cardheight+'px')
 }
 
 function imgCaption(){
@@ -124,17 +121,32 @@ function resetGrid(){
   }
 
   function svgAdder(){
-    console.log('backArr: '+backArr)
-    console.log('backSpread: '+backSpread)
     cardAdder()
     card.classed('texture',true)
     if (block.attr("id")=="block14"){
-
+      card.append('div').classed('textureborder',true)
+      .append('svg').classed('resvg',true)
+      svg=d3.select('.'+cardNum).select('.textureborder').select('svg')
+      svg
+      .append("line")
+      .classed('line',true)
+      .attr("x1", '0%')
+      .attr("x2", '100%')
+      .attr("y1", '0%')
+      .attr("y2", "100%")
+      svg
+      .append("line")
+      .classed('line',true)
+      .attr("x1", '100%')
+      .attr("x2", '0%')
+      .attr("y1", '0%')
+      .attr("y2", "100%")
     }else{
       switch(backSpread[0]){
         case "A":
-        card.append('svg').classed('resvg',true)
-        svg=d3.select('.'+cardNum).select('svg')
+        card.append('div').classed('textureborder',true)
+        .append('svg').classed('resvg',true)
+        svg=d3.select('.'+cardNum).select('.textureborder').select('svg')
         svg
         .append("line")
         .classed('line',true)
@@ -152,8 +164,8 @@ function resetGrid(){
         break;
 
         case "B":
-        card.append('svg').classed('resvg',true)
-        svg=d3.select('.'+cardNum).select('svg')
+        card.append('div').classed('textureborder',true).append('svg').classed('resvg',true)
+        svg=d3.select('.'+cardNum).select('.textureborder').select('svg')
         svg.append("line")
         .classed('line',true)
         .attr("x1", '25%')
@@ -173,18 +185,36 @@ function resetGrid(){
         .attr("x2", '75%')
         .attr("y1", '25%')
         .attr("y2", "75%")
-
-        card.append('div').classed('arrow1',true).html(arrow)
-        card.append('div').classed('arrow2',true).html(arrow)
-        card.append('div').classed('arrow3',true).html(arrow)
-
+        inBox=d3.select('.'+cardNum).select('.textureborder')
+        inBox.append('div').classed('arrow1',true).html(arrow)
+        inBox.append('div').classed('arrow2',true).html(arrow)
+        inBox.append('div').classed('arrow3',true).html(arrow)
         break;
-
         case "C":
+        card.append('div').classed('textureborder',true)
+        inBox=d3.select('.'+cardNum).select('.textureborder')
         break;
         case "D":
+        card.append('div').classed('textureborder',true)
+        .append('svg').classed('resvg',true)
+        svg=d3.select('.'+cardNum).select('.textureborder').select('svg')
+        svg
+        .append("line")
+        .classed('line',true)
+        .attr("x1", '0%')
+        .attr("x2", '100%')
+        .attr("y1", '0%')
+        .attr("y2", "100%")
+        svg
+        .append("line")
+        .classed('line',true)
+        .attr("x1", '100%')
+        .attr("x2", '0%')
+        .attr("y1", '0%')
+        .attr("y2", "100%")
         break;
         case "E":
+        card.append('div').classed('textureborder',true)
         break;
       }//end of switch
     }//end of if-statement
@@ -247,7 +277,7 @@ function resetGrid(){
       blockAdder(item,row,blockCounter)
       block.classed("genretype",true)
       cardAdder()
-      card.append('span').html('photo').attr("class","genrehead")
+      card.append('span').html('photography').attr("class","genrehead")
       break;
     } //end of switch
     blockCounter+=1
@@ -443,7 +473,6 @@ function listenerCall(){
 
 function listenerCallMobile(){
   checkModeMobile2()
-  console.log('fired')
   imgCaption()
   updateSVG()
 }
