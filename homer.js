@@ -5,6 +5,7 @@ var proj1='assets/bg2.jpg'
 var p1title="NYC Photography"
 var proj2='assets/bg3.png'
 var p2title="NSFP Magazine November 2019"
+var wptog='play'
 
 /*---end of PHP gets---*/
 
@@ -14,17 +15,17 @@ var root=root = document.documentElement
 container=d3.select('#container')
 var detectMobile=false
 m0Blocks=['name','proj','proj','genre','toggle','proj']
-m1Blocks=['name','genre','toggle','back','back','back','proj','proj','proj']
-m2Blocks=['name','proj','back','exp','back','back','back','des','proj','pho','proj','ill','back','toggle','back']
-m2Blocks=['name','des','ill','exp','pho','back','proj','proj','proj','toggle','back','back','back','back','back']
+m1Blocks=['name','back','back','toggle','back','theme','genre','back','back']
+m2Blocks=['name','toggle','back','back','back','des','ill','back','theme','back','exp','pho','back','back','back']
 let vh = 1
 var capHeight="30"
-var backArr=["B","A","C","D","E"]
+var backArr=["B","A","C","D","E","F","G","H"]
 
 /*-----------end of starting definitions-------------*/
 
 /*Static SVGs*/
 var arrow='<svg xmlns="http://www.w3.org/2000/svg" class="arrow" viewBox="0 0 102.61 70.2"><polyline points="0.8 69.6 51.3 1.68 101.8 69.6"/></svg>'
+
 /*-----------update display-------------*/
 function updateHeight(){
   //credit to Louis Hoebregts at css tricks for responsive height tutorial
@@ -52,6 +53,20 @@ function imgCaption(){
     d3.selectAll('.projdesc').style("padding-top","0px")
   }
   d3.selectAll('.projdesc').style("height",capHeight+"px")
+}
+
+function checkTog(){
+  if (wptog=='play'){
+    d3.select('.worktog').classed('toghover',true)
+    d3.select('.playtog').classed('toghover',false)
+    d3.select('.worktog').select('.togsquare').style('display','none')
+    d3.select('.playtog').select('.togsquare').style('display','inherit')
+  }else{
+    d3.select('.worktog').classed('toghover',false)
+    d3.select('.playtog').classed('toghover',true)
+    d3.select('.worktog').select('.togsquare').style('display','inherit')
+    d3.select('.playtog').select('.togsquare').style('display','none')
+  }
 }
 
 function resetGrid(){
@@ -125,22 +140,6 @@ function resetGrid(){
     card.classed('texture',true)
     if (block.attr("id")=="block14"){
       card.append('div').classed('textureborder',true)
-      .append('svg').classed('resvg',true)
-      svg=d3.select('.'+cardNum).select('.textureborder').select('svg')
-      svg
-      .append("line")
-      .classed('line',true)
-      .attr("x1", '0%')
-      .attr("x2", '100%')
-      .attr("y1", '0%')
-      .attr("y2", "100%")
-      svg
-      .append("line")
-      .classed('line',true)
-      .attr("x1", '100%')
-      .attr("x2", '0%')
-      .attr("y1", '0%')
-      .attr("y2", "100%")
     }else{
       switch(backSpread[0]){
         case "A":
@@ -162,7 +161,6 @@ function resetGrid(){
         .attr("y1", '0%')
         .attr("y2", "100%")
         break;
-
         case "B":
         card.append('div').classed('textureborder',true).append('svg').classed('resvg',true)
         svg=d3.select('.'+cardNum).select('.textureborder').select('svg')
@@ -191,20 +189,8 @@ function resetGrid(){
         inBox.append('div').classed('arrow3',true).html(arrow)
         break;
         case "C":
-        card.append('div').classed('textureborder',true)
-        inBox=d3.select('.'+cardNum).select('.textureborder')
-        break;
-        case "D":
-        card.append('div').classed('textureborder',true)
-        .append('svg').classed('resvg',true)
+        card.append('div').classed('textureborder',true).append('svg').classed('resvg',true)
         svg=d3.select('.'+cardNum).select('.textureborder').select('svg')
-        svg
-        .append("line")
-        .classed('line',true)
-        .attr("x1", '0%')
-        .attr("x2", '100%')
-        .attr("y1", '0%')
-        .attr("y2", "100%")
         svg
         .append("line")
         .classed('line',true)
@@ -212,14 +198,89 @@ function resetGrid(){
         .attr("x2", '0%')
         .attr("y1", '0%')
         .attr("y2", "100%")
+        svg
+        .append("line")
+        .classed('line',true)
+        .attr("x1", '76%')
+        .attr("x2", '0%')
+        .attr("y1", '0%')
+        .attr("y2", "76%")
+        svg
+        .append("line")
+        .classed('line',true)
+        .attr("x1", '25%')
+        .attr("x2", '100%')
+        .attr("y1", '100%')
+        .attr("y2", "25%")
+        svg
+        .append("line")
+        .classed('line',true)
+        .attr("x1", '50%')
+        .attr("x2", '0%')
+        .attr("y1", '0%')
+        .attr("y2", "50%")
+        svg
+        .append("line")
+        .classed('line',true)
+        .attr("x1", '100%')
+        .attr("x2", '50%')
+        .attr("y1", '50%')
+        .attr("y2", "100%")
+        break;
+        case "D":
+        card.append('div').classed('textureborder',true)
         break;
         case "E":
+        card.append('div').classed('textureborder',true)
+        break;
+        case "F":
+        card.append('div').classed('textureborder',true)
+        break;
+        case "G":
+        card.append('div').classed('textureborder',true)
+        break;
+        case "H":
         card.append('div').classed('textureborder',true)
         break;
       }//end of switch
     }//end of if-statement
 
     backSpread.splice(0,1)
+  }//end of svgAdder
+
+  function genreAdder(genre){
+    card.append('div').classed('margincontainer',true)
+    .append('div').classed('headbox',true).attr('id',genre+'head')
+    holder=d3.select('#'+genre+'head')
+    if (genre=='experiments'){
+      holder.append('div').classed('genrehead',true).html(genre)
+      holder.append('div').classed('arrowholder',true)
+      holder.append('div').classed('arrowline',true)
+      .append('svg').classed('arrowsvg',true)
+      .append('line')
+      .classed('wline',true)
+      .attr("x1", '0%')
+      .attr("x2", '100%')
+      .attr("y1", '50%')
+      .attr("y2", "50%")
+      holder.select('.arrowline')
+      .append('div').classed('rsquare',true)
+
+
+    }else{
+      holder.append('div').classed('arrowline',true)
+      .append('svg').classed('arrowsvg',true)
+      .append('line')
+      .classed('wline',true)
+      .attr("x1", '0%')
+      .attr("x2", '100%')
+      .attr("y1", '50%')
+      .attr("y2", "50%")
+      holder.append('div').classed('arrowholder',true)
+      .append('div').classed('square',true)
+      holder.append('div').classed('genrehead',true).html(genre)
+    }
+
   }
 
   rows=d3.selectAll('.row')
@@ -246,7 +307,12 @@ function resetGrid(){
       break;
       case 'toggle':
       blockAdder(item,row,blockCounter)
-      block.attr("onclick","randomize(m2Blocks);")
+      cardAdder()
+      card.append('div').classed('shuffle',true).html('shuffle<br>tiles!').attr("onclick","randomize(m2Blocks);")
+      card.append('div').classed('workplay',true)
+      .append('div').classed('worktog',true).attr('onclick','toggleDisplay("work");').html('work').append('div').classed('togsquare',true)
+      d3.select('.workplay').append('div').attr('onclick','toggleDisplay("play");').classed('playtog',true).html('play')
+      .append('div').classed('togsquare',true)
       break;
       case 'back':
       blockAdder(item,row,blockCounter)
@@ -255,29 +321,34 @@ function resetGrid(){
       case 'genre':
       blockAdder(item,row,blockCounter)
       break;
+
       case 'des':
       blockAdder(item,row,blockCounter)
       block.classed("genretype",true)
       cardAdder()
-      card.append('span').html('design').attr("class","genrehead")
+      genreAdder('design')
       break;
       case 'ill':
       blockAdder(item,row,blockCounter)
       block.classed("genretype",true)
       cardAdder()
-      card.append('span').html('illustration').attr("class","genrehead")
+      genreAdder('illustration')
       break;
       case 'exp':
       blockAdder(item,row,blockCounter)
       block.classed("genretype",true)
       cardAdder()
-      card.append('span').html('experiments').attr("class","genrehead")
+      genreAdder('experiments')
       break;
       case 'pho':
       blockAdder(item,row,blockCounter)
       block.classed("genretype",true)
       cardAdder()
-      card.append('span').html('photography').attr("class","genrehead")
+      genreAdder('photo')
+      break;
+      case 'theme':
+      blockAdder(item,row,blockCounter)
+      block.classed("back",true)
       break;
     } //end of switch
     blockCounter+=1
@@ -315,6 +386,7 @@ function resetGrid(){
 blockCounter=0
 imgCaption()
 updateSVG()
+checkTog()
 } //end of resetGrid
 /*-----------end of update display-------------*/
 
@@ -469,14 +541,28 @@ function listenerCall(){
   checkMode()
   imgCaption()
   updateSVG()
+  checkTog()
 }
 
 function listenerCallMobile(){
   checkModeMobile2()
   imgCaption()
   updateSVG()
+  checkTog()
 }
 /*-----------end of mode check-------------*/
+
+function toggleDisplay(switcher){
+  if (switcher=='play'&&wptog=='play'){
+  }else if(switcher=='play'&&wptog=='work'){
+    wptog='play'
+  }else if(switcher=='work'&&wptog=='work'){
+  }else if(switcher=='work'&&wptog=='play'){
+    wptog='work'
+  }
+  checkTog()
+}//end of toggleDisplay
+
 
 function randomize(array){
   array.sort(function(a, b){return 0.5 - Math.random()});
@@ -485,6 +571,9 @@ function randomize(array){
   backArr.sort(function(a, b){return 0.5 - Math.random()});
   resetGrid()
 }//end of randomize
+
+
+
 
 listenerCall()
 window.addEventListener("deviceorientation", listenerCallMobile, true);
