@@ -37,7 +37,7 @@ function updateHeight(){
 }
 
 function updateSVG(){
-  if (wptog=='play'){
+  if (cardheight=d3.select('.textureborder').node()!==null){
   cardheight=d3.select('.textureborder').node().getBoundingClientRect().height-4
   d3.selectAll('.resvg').style("height",cardheight+'px')
 }else{}
@@ -613,25 +613,56 @@ function accommodate9Block(array){
 }//end of accomodate9
 function accommodate6Block(array){
   m0Blocks=[]
-  function arrange(item){
-    switch(item){
-      case 'name':
-      m0Blocks.push('name')
-      break;
-      case 'proj':
-      m0Blocks.push('proj')
-      break;
-      case 'toggle':
-      m0Blocks.push('toggle')
-      break;
-      case 'back':
-      break;
-      case 'genre':
-      m0Blocks.push('genre')
-      break;
-    } //end of switch
-  }//end of arrange
-  array.forEach(item=>arrange(item))
+  var lever=true;
+    function playArrange(item){
+      switch(item){
+        case 'name':
+        m0Blocks.push('name')
+        break;
+        case 'back':
+        if (lever==true){
+          m0Blocks.push('back')
+          lever=false
+        }else{
+          lever=true
+        }
+        console.log(lever)
+        break;
+        case 'toggle':
+        m0Blocks.push('toggle')
+        break;
+        case 'genre':
+        m0Blocks.push('genre')
+        break;
+      } //end of switch
+    }//end of arrange
+    function workArrange(item){
+      switch(item){
+        case 'name':
+        m0Blocks.push('name')
+        break;
+        case 'proj':
+        if (lever==true){
+          m0Blocks.push('proj')
+          lever=false
+        }else{
+          lever=true
+        }
+        break;
+        case 'toggle':
+        m0Blocks.push('toggle')
+        break;
+        case 'genre':
+        m0Blocks.push('genre')
+        break;
+      } //end of switch
+    }//end of arrange
+  if (wptog=='play'){
+    array.forEach(item=>playArrange(item))
+  }else{
+    array.forEach(item=>workArrange(item))
+  }
+
 }//end of accomodate9
 function checkModeMobile2(){
   detectMobile=true
