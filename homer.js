@@ -703,6 +703,10 @@ function wpswitch(wptoggle){
       var backSpot=m1Blocks.findIndex(element=>element=='back')
       m1Blocks.splice(backSpot,1,'proj')
     }
+    while(m0Blocks.findIndex(element=>element=='back')!== -1){
+      var backSpot=m0Blocks.findIndex(element=>element=='back')
+      m0Blocks.splice(backSpot,1,'proj')
+    }
     break;
     case 'play':
     while(m2Blocks.findIndex(element=>element=='proj')!== -1){
@@ -712,6 +716,10 @@ function wpswitch(wptoggle){
     while(m1Blocks.findIndex(element=>element=='proj')!== -1){
       var backSpot=m1Blocks.findIndex(element=>element=='proj')
       m1Blocks.splice(backSpot,1,'back')
+    }
+    while(m0Blocks.findIndex(element=>element=='proj')!== -1){
+      var backSpot=m0Blocks.findIndex(element=>element=='proj')
+      m0Blocks.splice(backSpot,1,'back')
     }
     break;
   }
