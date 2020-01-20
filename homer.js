@@ -1,4 +1,4 @@
-/*---PHP gets---*/
+/*---PHP and url gets---*/
 var proj0='assets/bg1.jpg'
 var p0title="NSFP Illustration"
 var proj1='assets/bg2.jpg'
@@ -14,12 +14,12 @@ var mode=3;
 var root=root = document.documentElement
 container=d3.select('#container')
 var detectMobile=false
-m0Blocks=['name','proj','proj','genre','toggle','proj']
-m1Blocks=['name','back','back','toggle','back','theme','genre','back','back']
-m2Blocks=['name','toggle','back','back','back','des','ill','back','theme','back','exp','pho','back','back','back']
+m0Blocks=['name','back','back','genre','toggle','back']
+m1Blocks=['name','back','back','genre','back','back','toggle','back','back']
+m2Blocks=['name','toggle','back','back','back','des','ill','back','back','back','exp','pho','back','back','back']
 let vh = 1
 var capHeight="30"
-var backArr=["B","A","C","D","E","F","G","H"]
+var backArr=["A","B","C","D","E","F","G","H","I"]
 
 /*-----------end of starting definitions-------------*/
 
@@ -37,9 +37,11 @@ function updateHeight(){
 }
 
 function updateSVG(){
+  if (wptog=='play'){
   cardheight=d3.select('.textureborder').node().getBoundingClientRect().height-4
   d3.selectAll('.resvg').style("height",cardheight+'px')
-}
+}else{}
+}//end of updateSVG
 
 function imgCaption(){
   num0=d3.select('.num0').node().getBoundingClientRect()
@@ -120,27 +122,27 @@ function resetGrid(){
       card.append("div")
       .classed("projdesc",true)
       .html(p0title)
+      projCounter+=1
       break;
       case 1:
       card.append("div")
       .classed("projdesc",true)
       .html(p1title)
+      projCounter+=1
       break;
       case 2:
       card.append("div")
       .classed("projdesc",true)
       .html(p2title)
+      projCounter=0
       break;
     }
-    projCounter+=1
+
   }
 
   function svgAdder(){
     cardAdder()
     card.classed('texture',true)
-    if (block.attr("id")=="block14"){
-      card.append('div').classed('textureborder',true)
-    }else{
       switch(backSpread[0]){
         case "A":
         card.append('div').classed('textureborder',true)
@@ -189,49 +191,62 @@ function resetGrid(){
         inBox.append('div').classed('arrow3',true).html(arrow)
         break;
         case "C":
-        card.append('div').classed('textureborder',true).append('svg').classed('resvg',true)
-        svg=d3.select('.'+cardNum).select('.textureborder').select('svg')
-        svg
-        .append("line")
-        .classed('line',true)
-        .attr("x1", '100%')
-        .attr("x2", '0%')
-        .attr("y1", '0%')
-        .attr("y2", "100%")
-        svg
-        .append("line")
-        .classed('line',true)
-        .attr("x1", '76%')
-        .attr("x2", '0%')
-        .attr("y1", '0%')
-        .attr("y2", "76%")
-        svg
-        .append("line")
-        .classed('line',true)
-        .attr("x1", '25%')
-        .attr("x2", '100%')
-        .attr("y1", '100%')
-        .attr("y2", "25%")
-        svg
-        .append("line")
-        .classed('line',true)
-        .attr("x1", '50%')
-        .attr("x2", '0%')
-        .attr("y1", '0%')
-        .attr("y2", "50%")
-        svg
-        .append("line")
-        .classed('line',true)
-        .attr("x1", '100%')
-        .attr("x2", '50%')
-        .attr("y1", '50%')
-        .attr("y2", "100%")
+        if (mode==0){
+          console.log('6toggle')
+        }else{
+          card.append('div').classed('textureborder',true).append('svg').classed('resvg',true)
+          svg=d3.select('.'+cardNum).select('.textureborder').select('svg')
+          svg
+          .append("line")
+          .classed('line',true)
+          .attr("x1", '100%')
+          .attr("x2", '0%')
+          .attr("y1", '0%')
+          .attr("y2", "100%")
+          svg
+          .append("line")
+          .classed('line',true)
+          .attr("x1", '76%')
+          .attr("x2", '0%')
+          .attr("y1", '0%')
+          .attr("y2", "76%")
+          svg
+          .append("line")
+          .classed('line',true)
+          .attr("x1", '25%')
+          .attr("x2", '100%')
+          .attr("y1", '100%')
+          .attr("y2", "25%")
+          svg
+          .append("line")
+          .classed('line',true)
+          .attr("x1", '50%')
+          .attr("x2", '0%')
+          .attr("y1", '0%')
+          .attr("y2", "50%")
+          svg
+          .append("line")
+          .classed('line',true)
+          .attr("x1", '100%')
+          .attr("x2", '50%')
+          .attr("y1", '50%')
+          .attr("y2", "100%")
+        }
+
         break;
         case "D":
-        card.append('div').classed('textureborder',true)
+        if (mode==1){
+          console.log('9toggle')
+        }else{
+          card.append('div').classed('textureborder',true)
+        }
         break;
         case "E":
-        card.append('div').classed('textureborder',true)
+        if (mode==2){
+          console.log('15toggle')
+        }else{
+          card.append('div').classed('textureborder',true)
+        }
         break;
         case "F":
         card.append('div').classed('textureborder',true)
@@ -242,9 +257,10 @@ function resetGrid(){
         case "H":
         card.append('div').classed('textureborder',true)
         break;
+        case "I":
+        card.append('div').classed('textureborder',true)
+        break;
       }//end of switch
-    }//end of if-statement
-
     backSpread.splice(0,1)
   }//end of svgAdder
 
@@ -320,8 +336,42 @@ function resetGrid(){
       break;
       case 'genre':
       blockAdder(item,row,blockCounter)
+      cardAdder()
+      card.append('div').classed('margincontainer',true).attr('id','genreholder')
+      inner=card.select('.margincontainer')
+      genres=['design','illustration','experiments','photo']
+      for(i = 0; i < genres.length; i++){
+        genre=genres[i]
+        inner.append('div').classed('headbox',true).attr('id',genre+'headm1')
+        holder=d3.select('#'+genre+'headm1')
+        if (i==2){
+          holder.append('div').classed('genrehead',true).html(genre)
+          holder.append('div').classed('arrowholder',true)
+          holder.append('div').classed('arrowline',true)
+          .append('svg').classed('arrowsvg',true)
+          .append('line')
+          .classed('wline',true)
+          .attr("x1", '0%')
+          .attr("x2", '100%')
+          .attr("y1", '50%')
+          .attr("y2", "50%")
+          holder.select('.arrowline')
+          .append('div').classed('rsquare',true)
+        }else{
+          holder.append('div').classed('arrowline',true)
+          .append('svg').classed('arrowsvg',true)
+          .append('line')
+          .classed('wline',true)
+          .attr("x1", '0%')
+          .attr("x2", '100%')
+          .attr("y1", '50%')
+          .attr("y2", "50%")
+          holder.append('div').classed('arrowholder',true)
+          .append('div').classed('square',true)
+          holder.append('div').classed('genrehead',true).html(genre)
+        }//end of if statement
+      }//end of for loop
       break;
-
       case 'des':
       blockAdder(item,row,blockCounter)
       block.classed("genretype",true)
@@ -345,10 +395,6 @@ function resetGrid(){
       block.classed("genretype",true)
       cardAdder()
       genreAdder('photo')
-      break;
-      case 'theme':
-      blockAdder(item,row,blockCounter)
-      block.classed("back",true)
       break;
     } //end of switch
     blockCounter+=1
@@ -438,9 +484,11 @@ function checkModeMobile(){
 
 function accommodate9Block(array){
   m1Blocks=[]
-  var lever=true;
+  var exCounter=0
+  var ex2Counter=0;
   var counter=0
-  function arrange(item){
+
+  function arrangePlay(item){
     switch(item){
       case 'name':
       m1Blocks.push('name')
@@ -452,12 +500,13 @@ function accommodate9Block(array){
       m1Blocks.push('toggle')
       break;
       case 'back':
-      if(lever==true){
+      if(exCounter<2&&ex2Counter<6){
         m1Blocks.push('back')
-        lever=false
-      }else{
-        lever=true
-      }
+        exCounter+=1
+        ex2Counter+=1
+      }else if(exCounter>1&&ex2Counter<6){
+        exCounter=0
+      }else if(ex2Counter>5){}
       break;
       case 'des':
       if (counter==2){
@@ -492,17 +541,75 @@ function accommodate9Block(array){
       }
       break;
 
-      case 'last':
-      if(lever==true){
-        m1Blocks.push('back')
-        lever=false
-      }else{
-        lever=true
-      }
+      case 'theme':
+      m1Blocks.push('theme')
       break;
     } //end of switch
-  }//end of arrange
-  array.forEach(item=>arrange(item))
+  }//end of arrangePlay
+  function arrangeWork(item){
+    switch(item){
+      case 'name':
+      m1Blocks.push('name')
+      break;
+      case 'toggle':
+      m1Blocks.push('toggle')
+      break;
+      case 'proj':
+      if(exCounter<2&&ex2Counter<6){
+        m1Blocks.push('proj')
+        exCounter+=1
+        ex2Counter+=1
+      }else if(exCounter>1&&ex2Counter<6){
+        exCounter=0
+      }else if(ex2Counter>5){}
+      break;
+      case 'des':
+      if (counter==2){
+        m1Blocks.push('genre')
+        counter+=1
+      }else{
+        counter+=1
+      }
+      break;
+      case 'ill':
+      if (counter==2){
+        m1Blocks.push('genre')
+        counter+=1
+      }else{
+        counter+=1
+      }
+      break;
+      case 'exp':
+      if (counter==2){
+        m1Blocks.push('genre')
+        counter+=1
+      }else{
+        counter+=1
+      }
+      break;
+      case 'pho':
+      if (counter==2){
+        m1Blocks.push('genre')
+        counter+=1
+      }else{
+        counter+=1
+      }
+      break;
+
+      case 'theme':
+      m1Blocks.push('theme')
+      break;
+    } //end of switch
+  }//end of arrangeWork
+  switch (wptog){
+    case 'play':
+    array.forEach(item=>arrangePlay(item))
+    break;
+    case 'work':
+    array.forEach(item=>arrangeWork(item))
+    break;
+  }
+
 }//end of accomodate9
 function accommodate6Block(array){
   m0Blocks=[]
@@ -538,10 +645,12 @@ if (detectMobile==false){
 }//end of checkMode2
 
 function listenerCall(){
-  checkMode()
-  imgCaption()
-  updateSVG()
-  checkTog()
+  if (window.innerWidth>300&&window.innerHeight>370){
+    checkMode()
+    imgCaption()
+    updateSVG()
+    checkTog()
+  }
 }
 
 function listenerCallMobile(){
@@ -552,6 +661,32 @@ function listenerCallMobile(){
 }
 /*-----------end of mode check-------------*/
 
+function wpswitch(wptoggle){
+  switch (wptoggle){
+    case 'work':
+    while(m2Blocks.findIndex(element=>element=='back')!== -1){
+      var backSpot=m2Blocks.findIndex(element=>element=='back')
+      m2Blocks.splice(backSpot,1,'proj')
+    }
+    while(m1Blocks.findIndex(element=>element=='back')!== -1){
+      var backSpot=m1Blocks.findIndex(element=>element=='back')
+      m1Blocks.splice(backSpot,1,'proj')
+    }
+    break;
+    case 'play':
+    while(m2Blocks.findIndex(element=>element=='proj')!== -1){
+      var projSpot=m2Blocks.findIndex(element=>element=='proj')
+      m2Blocks.splice(projSpot,1,'back')
+    }
+    while(m1Blocks.findIndex(element=>element=='proj')!== -1){
+      var backSpot=m1Blocks.findIndex(element=>element=='proj')
+      m1Blocks.splice(backSpot,1,'back')
+    }
+    break;
+  }
+}
+
+
 function toggleDisplay(switcher){
   if (switcher=='play'&&wptog=='play'){
   }else if(switcher=='play'&&wptog=='work'){
@@ -561,6 +696,8 @@ function toggleDisplay(switcher){
     wptog='work'
   }
   checkTog()
+  wpswitch(wptog)
+  resetGrid()
 }//end of toggleDisplay
 
 
@@ -569,13 +706,35 @@ function randomize(array){
   accommodate9Block(m2Blocks)
   accommodate6Block(m1Blocks)
   backArr.sort(function(a, b){return 0.5 - Math.random()});
+  var backNine=backArr.slice(0,5)
+  var backSix=backArr.slice(0,2)
+  var themepres=backNine.findIndex(element=>element=='D')
+  if(mode==1&&themepres==-1){
+    oldIndex=backArr.findIndex(element=>element=='D')
+    newIndex=Math.floor(6*Math.random())
+    otherValue=backArr[newIndex]
+    backArr.splice(newIndex,1,'D')
+    backArr.splice(oldIndex,1,otherValue)
+  }
+  themepres=backSix.findIndex(element=>element=='C')
+  if(mode==0&&themepres==-1){
+    oldIndex=backArr.findIndex(element=>element=='C')
+    newIndex=Math.floor(3*Math.random())
+    otherValue=backArr[newIndex]
+    backArr.splice(newIndex,1,'C')
+    backArr.splice(oldIndex,1,otherValue)
+  }
   resetGrid()
+  checkTog()
 }//end of randomize
 
 
 
 
-listenerCall()
+checkMode()
+imgCaption()
+updateSVG()
+checkTog()
 window.addEventListener("deviceorientation", listenerCallMobile, true);
 window.addEventListener("orientationchange", listenerCallMobile);
 window.onresize=listenerCall;

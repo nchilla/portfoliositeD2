@@ -79,7 +79,7 @@ height:100%;
 }
 
 .projdesc{
-  background-color:var(--backcolor);
+  background-color:var(--solidback);
   width:calc(100% - 10px);
   height:30px;
   border-top:2px solid var(--outlinecolor);
@@ -89,6 +89,7 @@ height:100%;
   position:absolute;
   bottom:0;
   padding-left: 10px;
+  color:var(--nametype)
 }
 
 /*end of projects*/
@@ -114,7 +115,11 @@ height:100%;
   text-decoration: underline;
   cursor:pointer;
 }
-
+#genreholder{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
 
 .headbox{
   width:100%;
@@ -145,6 +150,18 @@ height:100%;
   transform-origin: 10% 50%;
   transform: rotate(45deg);
   */
+}
+#designheadm1{
+  justify-content:flex-start;
+}
+#illustrationheadm1{
+  justify-content:flex-start;
+}
+#experimentsheadm1{
+  justify-content:flex-end;
+}
+#photoheadm1{
+  justify-content:flex-start;
 }
 #illustrationhead{
   justify-content: flex-start;
@@ -298,7 +315,9 @@ height:100%;
   top:calc(50% - 6px);
   left:7px;
 }
-
+.toghover{
+  cursor:pointer;
+}
 .toghover:hover{
   text-decoration: underline;
   cursor:pointer;
@@ -317,8 +336,26 @@ height:100%;
   color:var(--solidback);
 }
 /*-----end of toggle boxes------*/
+/*
+@media(max-height:300px) and (max-width:900px){
+  .genrehead{
+    color:var(--solidback);
+  }
+  .arrowline{
+    display:none;
+  }
+  .arrowsvg{
+    display:none;
+  }
+  .square{
+    border:var(--solidback) solid 2px;
+  }
+  .rsquare{
+    border:var(--solidback) solid 2px;
+  }
 
-
+}
+*/
 /*name media queries*/
 @media (max-width:1010px) and (min-width:900px),(max-width:630px){
   #nametype{
@@ -414,5 +451,58 @@ height:100%;
     width:8px;
     height:8px;
     top:calc(50% - 5px);
+  }
+}
+
+@media (min-width:900px) and (max-width:1000px),(max-width:600px){
+  .arrowline{
+    width:0px;
+  }
+  .arrowsvg{
+    display:none;
+  }
+  .square{
+    left:-15px;
+  }
+  .rsquare{
+    left:0px;
+  }
+}
+
+@media (max-width:560px),(max-height:560px) and (max-width:900px){
+  .genrehead{
+    font-family: neuzeit-grotesk, sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 20px;
+    line-height: 20px;
+    height:20px;
+  }
+
+  .arrowholder{
+    height:20px;
+  }
+  .arrowline{
+    height:20px;
+    width:20px;
+  }
+  .arrowsvg{
+    display:inherit;
+    height:20px;
+  }
+  .headbox{
+    height:20px;
+  }
+  .square{
+    width:10px;
+    height:10px;
+    top:calc(50% - 6px);
+    left:-14px;
+  }
+  .rsquare{
+    width:10px;
+    height:10px;
+    top:calc(50% - 6px);
+    left:0px;
   }
 }
