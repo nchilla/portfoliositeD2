@@ -6,6 +6,8 @@ var p1title="NYC Photography"
 var proj2='assets/bg3.png'
 var p2title="NSFP Magazine November 2019"
 var wptog='play'
+var theme='boxes'
+var colors='yellow'
 
 /*---end of PHP gets---*/
 
@@ -19,7 +21,7 @@ m1Blocks=['name','back','back','genre','back','back','toggle','back','back']
 m2Blocks=['name','toggle','back','back','back','des','ill','back','back','back','exp','pho','back','back','back']
 let vh = 1
 var capHeight="30"
-var backArr=["A","B","C","D","E","F","G","H","I"]
+var backArr=["A","B","C","D","E","F","G","H","I","J"]
 
 /*-----------end of starting definitions-------------*/
 
@@ -34,6 +36,15 @@ function updateHeight(){
   root.style.setProperty('--vh', `${vh}px`)
   container.style('height',vh)
   document.getElementById('container').style.height='var(--vh)'
+}
+
+function colorsChange(){
+  root.style.setProperty('--outlinecolor','white')
+  root.style.setProperty('--backcolor','#3C45FF')
+  root.style.setProperty('--solidback','#3C45FF')
+  root.style.setProperty('--nametype','white')
+  colors='blue';
+  d3.select('.insertcolors').html(colors)
 }
 
 function updateSVG(){
@@ -140,6 +151,25 @@ function resetGrid(){
 
   }
 
+  function toggleBlock(){
+    card.append('div').classed('margincontainer',true).classed('control',true)
+    function rowAdder(type){
+      var holder=d3.select('.control')
+      if (type=='theme'){
+        var current=theme
+      }else{
+        var current=colors
+      }
+      holder.append('div').classed(type,true)
+      .append('div').classed('insert'+type,true).html(current)
+      d3.select('.'+type).append('div').classed('changedisplay',true).html('change').attr('onclick',type+'Change()')
+    }
+    rowAdder('colors')
+    rowAdder('theme')
+  }
+
+
+
   function svgAdder(){
     cardAdder()
     card.classed('texture',true)
@@ -164,34 +194,12 @@ function resetGrid(){
         .attr("y2", "100%")
         break;
         case "B":
-        card.append('div').classed('textureborder',true).append('svg').classed('resvg',true)
-        svg=d3.select('.'+cardNum).select('.textureborder').select('svg')
-        svg.append("line")
-        .classed('line',true)
-        .attr("x1", '25%')
-        .attr("x2", '25%')
-        .attr("y1", '25%')
-        .attr("y2", "75%")
-        svg.append("line")
-        .classed('line',true)
-        .attr("x1", '50%')
-        .attr("x2", '50%')
-        .attr("y1", '25%')
-        .attr("y2", "75%")
+        card.append('div').classed('textureborder',true)
 
-        svg.append("line")
-        .classed('line',true)
-        .attr("x1", '75%')
-        .attr("x2", '75%')
-        .attr("y1", '25%')
-        .attr("y2", "75%")
-        inBox=d3.select('.'+cardNum).select('.textureborder')
-        inBox.append('div').classed('arrow1',true).html(arrow)
-        inBox.append('div').classed('arrow2',true).html(arrow)
-        inBox.append('div').classed('arrow3',true).html(arrow)
         break;
         case "C":
         if (mode==0){
+          toggleBlock()
           console.log('6toggle')
         }else{
           card.append('div').classed('textureborder',true).append('svg').classed('resvg',true)
@@ -236,6 +244,7 @@ function resetGrid(){
         break;
         case "D":
         if (mode==1){
+          toggleBlock()
           console.log('9toggle')
         }else{
           card.append('div').classed('textureborder',true)
@@ -243,6 +252,7 @@ function resetGrid(){
         break;
         case "E":
         if (mode==2){
+          toggleBlock()
           console.log('15toggle')
         }else{
           card.append('div').classed('textureborder',true)
@@ -255,7 +265,31 @@ function resetGrid(){
         card.append('div').classed('textureborder',true)
         break;
         case "H":
-        card.append('div').classed('textureborder',true)
+        card.append('div').classed('textureborder',true).append('svg').classed('resvg',true)
+        svg=d3.select('.'+cardNum).select('.textureborder').select('svg')
+        svg.append("line")
+        .classed('line',true)
+        .attr("x1", '25%')
+        .attr("x2", '25%')
+        .attr("y1", '25%')
+        .attr("y2", "75%")
+        svg.append("line")
+        .classed('line',true)
+        .attr("x1", '50%')
+        .attr("x2", '50%')
+        .attr("y1", '25%')
+        .attr("y2", "75%")
+
+        svg.append("line")
+        .classed('line',true)
+        .attr("x1", '75%')
+        .attr("x2", '75%')
+        .attr("y1", '25%')
+        .attr("y2", "75%")
+        inBox=d3.select('.'+cardNum).select('.textureborder')
+        inBox.append('div').classed('arrow1',true).html(arrow)
+        inBox.append('div').classed('arrow2',true).html(arrow)
+        inBox.append('div').classed('arrow3',true).html(arrow)
         break;
         case "I":
         card.append('div').classed('textureborder',true)
@@ -324,8 +358,10 @@ function resetGrid(){
       case 'toggle':
       blockAdder(item,row,blockCounter)
       cardAdder()
-      card.append('div').classed('shuffle',true).html('shuffle<br>tiles!').attr("onclick","randomize(m2Blocks);")
-      card.append('div').classed('workplay',true)
+      card.append('div').classed("menu",true)
+      menu=d3.select('.menu')
+      menu.append('div').classed('shuffle',true).html('shuffle<br>tiles!').attr("onclick","randomize(m2Blocks);")
+      menu.append('div').classed('workplay',true)
       .append('div').classed('worktog',true).attr('onclick','toggleDisplay("work");').html('work').append('div').classed('togsquare',true)
       d3.select('.workplay').append('div').attr('onclick','toggleDisplay("play");').classed('playtog',true).html('play')
       .append('div').classed('togsquare',true)
