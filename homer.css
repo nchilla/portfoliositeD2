@@ -110,10 +110,7 @@ overflow: scroll;
   height:40px;
 }
 
-.genrehead:hover{
-  text-decoration: underline;
-  cursor:pointer;
-}
+
 #genreholder{
   display: flex;
   flex-direction: column;
@@ -333,13 +330,6 @@ overflow: scroll;
   top:calc(50% - 6px);
   left:20px;
 }
-.toghover{
-  cursor:pointer;
-}
-.toghover:hover{
-  text-decoration: underline;
-  cursor:pointer;
-}
 
 .worktog{
   position:relative;
@@ -349,10 +339,6 @@ overflow: scroll;
   position:relative;
 }
 
-.shuffle:hover{
-  background-color:var(--nametype);
-  color:var(--solidback);
-}
 
 /*---theme and color toggle------*/
 
@@ -396,10 +382,7 @@ overflow: scroll;
   color:var(--outlinecolor);
   border:var(--outline);
 }
-.changedisplay:hover{
-  background-color: var(--outlinecolor);
-  color:var(--backcolor);
-}
+
 
 
 /*
@@ -496,6 +479,33 @@ overflow: scroll;
 }
 */
 /*name media queries*/
+
+@media(hover:hover){
+  .genrehead:hover{
+    text-decoration: underline;
+    cursor:pointer;
+  }
+  .toghover{
+    cursor:pointer;
+  }
+  .toghover:hover{
+    text-decoration: underline;
+    cursor:pointer;
+  }
+  .shuffle:hover{
+    background-color:var(--nametype);
+    color:var(--solidback);
+  }
+  .changedisplay:hover{
+    background-color: var(--outlinecolor);
+    color:var(--backcolor);
+  }
+
+}
+
+
+
+
 @media (max-width:1010px) and (min-width:900px),(max-width:630px){
   #nametype{
     transform: rotate(-90deg);

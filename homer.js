@@ -7,7 +7,8 @@ var proj2='assets/bg3.png'
 var p2title="NSFP Magazine November 2019"
 var wptog='play'
 var theme='boxes'
-var colors='yellow'
+var colors=[{name:'yellow',back:'#FFFF82',fore:'black',solback:'black',solfore:'white'},{name:'blue',back:'#3C45FF',fore:'white',solback:'#3C45FF',solfore:'white'},{name:'pink',back:'#FFC6D9',fore:'black',solback:'#FFC6D9',solfore:'black'},{name:'white',back:'white',fore:'black',solback:'black',solfore:'white'}]
+var colornow=0
 
 /*---end of PHP gets---*/
 
@@ -21,7 +22,7 @@ m1Blocks=['name','back','back','genre','back','back','toggle','back','back']
 m2Blocks=['name','toggle','back','back','back','des','ill','back','back','back','exp','pho','back','back','back']
 let vh = 1
 var capHeight="30"
-var backArr=["A","B","C","D","E","F","G","H","I","J"]
+var backArr=["A","B","C","D","E","F","G","H","I"]
 
 /*-----------end of starting definitions-------------*/
 
@@ -39,12 +40,15 @@ function updateHeight(){
 }
 
 function colorsChange(){
-  root.style.setProperty('--outlinecolor','white')
-  root.style.setProperty('--backcolor','#3C45FF')
-  root.style.setProperty('--solidback','#3C45FF')
-  root.style.setProperty('--nametype','white')
-  colors='blue';
-  d3.select('.insertcolors').html(colors)
+  colornow+=1
+  if (colornow+1>colors.length){
+    colornow=0
+  }
+  root.style.setProperty('--outlinecolor',colors[colornow].fore)
+  root.style.setProperty('--backcolor',colors[colornow].back)
+  root.style.setProperty('--solidback',colors[colornow].solback)
+  root.style.setProperty('--nametype',colors[colornow].solfore)
+  d3.select('.insertcolors').html(colors[colornow].name)
 }
 
 function updateSVG(){
@@ -158,11 +162,11 @@ function resetGrid(){
       if (type=='theme'){
         var current=theme
       }else{
-        var current=colors
+        var current=colors[colornow].name
       }
       holder.append('div').classed(type,true)
       .append('div').classed('insert'+type,true).html(current)
-      d3.select('.'+type).append('div').classed('changedisplay',true).html('change').attr('onclick',type+'Change()')
+      d3.select('.'+type).append('div').classed('changedisplay',true).html('change').attr('onclick',type+'Change()').classed('noselect',true)
     }
     rowAdder('colors')
     rowAdder('theme')
@@ -194,8 +198,57 @@ function resetGrid(){
         .attr("y2", "100%")
         break;
         case "B":
-        card.append('div').classed('textureborder',true)
-
+        card.append('div').classed('textureborder',true).append('svg').classed('resvg',true)
+        svg=d3.select('.'+cardNum).select('.textureborder').select('svg')
+        svg
+        .append("line")
+        .classed('line',true)
+        .attr("x1", '20%')
+        .attr("x2", '80%')
+        .attr("y1", '20%')
+        .attr("y2", "20%")
+        svg
+        .append("line")
+        .classed('line',true)
+        .attr("x1", '80%')
+        .attr("x2", '80%')
+        .attr("y1", '20%')
+        .attr("y2", "80%")
+        svg
+        .append("line")
+        .classed('line',true)
+        .attr("x1", '20%')
+        .attr("x2", '80%')
+        .attr("y1", '80%')
+        .attr("y2", "80%")
+        svg
+        .append("line")
+        .classed('line',true)
+        .attr("x1", '20%')
+        .attr("x2", '20%')
+        .attr("y1", '80%')
+        .attr("y2", "40%")
+        svg
+        .append("line")
+        .classed('line',true)
+        .attr("x1", '20%')
+        .attr("x2", '60%')
+        .attr("y1", '40%')
+        .attr("y2", "40%")
+        svg
+        .append("line")
+        .classed('line',true)
+        .attr("x1", '60%')
+        .attr("x2", '60%')
+        .attr("y1", '40%')
+        .attr("y2", "60%")
+        svg
+        .append("line")
+        .classed('line',true)
+        .attr("x1", '60%')
+        .attr("x2", '50%')
+        .attr("y1", '60%')
+        .attr("y2", "60%")
         break;
         case "C":
         if (mode==0){
@@ -240,7 +293,6 @@ function resetGrid(){
           .attr("y1", '50%')
           .attr("y2", "100%")
         }
-
         break;
         case "D":
         if (mode==1){
@@ -248,6 +300,29 @@ function resetGrid(){
           console.log('9toggle')
         }else{
           card.append('div').classed('textureborder',true)
+          .append('svg').classed('resvg',true)
+          svg=d3.select('.'+cardNum).select('.textureborder').select('svg')
+          svg
+          .append("line")
+          .classed('line',true)
+          .attr("x1", '0%')
+          .attr("x2", '100%')
+          .attr("y1", '100%')
+          .attr("y2", "50%")
+          svg
+          .append("line")
+          .classed('line',true)
+          .attr("x1", '0%')
+          .attr("x2", '100%')
+          .attr("y1", '0%')
+          .attr("y2", "50%")
+          svg
+          .append("line")
+          .classed('line',true)
+          .attr("x1", '50%')
+          .attr("x2", '50%')
+          .attr("y1", '25%')
+          .attr("y2", "75%")
         }
         break;
         case "E":
@@ -256,13 +331,136 @@ function resetGrid(){
           console.log('15toggle')
         }else{
           card.append('div').classed('textureborder',true)
+          .append('svg').classed('resvg',true)
+          svg=d3.select('.'+cardNum).select('.textureborder').select('svg')
+          svg
+          .append("line")
+          .classed('line',true)
+          .attr("x1", '0%')
+          .attr("x2", '100%')
+          .attr("y1", '100%')
+          .attr("y2", "50%")
+          svg
+          .append("line")
+          .classed('line',true)
+          .attr("x1", '0%')
+          .attr("x2", '100%')
+          .attr("y1", '0%')
+          .attr("y2", "50%")
+          svg
+          .append("line")
+          .classed('line',true)
+          .attr("x1", '50%')
+          .attr("x2", '50%')
+          .attr("y1", '25%')
+          .attr("y2", "75%")
         }
         break;
         case "F":
-        card.append('div').classed('textureborder',true)
+        card.append('div').classed('textureborder',true).append('svg').classed('resvg',true)
+        svg=d3.select('.'+cardNum).select('.textureborder').select('svg')
+        svg
+        .append("line")
+        .classed('line',true)
+        .attr("x1", '50%')
+        .attr("x2", '50%')
+        .attr("y1", '0%')
+        .attr("y2", "30%")
+        svg
+        .append("line")
+        .classed('line',true)
+        .attr("x1", '50%')
+        .attr("x2", '50%')
+        .attr("y1", '100%')
+        .attr("y2", "70%")
+        svg
+        .append("line")
+        .classed('line',true)
+        .attr("x1", '100%')
+        .attr("x2", "70%")
+        .attr("y1", '50%')
+        .attr("y2", '50%')
+        svg
+        .append("line")
+        .classed('line',true)
+        .attr("x1", '0%')
+        .attr("x2", "30%")
+        .attr("y1", '50%')
+        .attr("y2", '50%')
+        svg
+        .append("line")
+        .classed('line',true)
+        .attr("x1", '30%')
+        .attr("x2", "50%")
+        .attr("y1", '50%')
+        .attr("y2", '30%')
+        svg
+        .append("line")
+        .classed('line',true)
+        .attr("x1", '30%')
+        .attr("x2", "50%")
+        .attr("y1", '50%')
+        .attr("y2", '70%')
+        svg
+        .append("line")
+        .classed('line',true)
+        .attr("x1", '50%')
+        .attr("x2", '70%')
+        .attr("y1", '30%')
+        .attr("y2", "50%")
+        svg
+        .append("line")
+        .classed('line',true)
+        .attr("x1", '50%')
+        .attr("x2", '70%')
+        .attr("y1", '70%')
+        .attr("y2", "50%")
         break;
         case "G":
-        card.append('div').classed('textureborder',true)
+        card.append('div').classed('textureborder',true).append('svg').classed('resvg',true)
+        svg=d3.select('.'+cardNum).select('.textureborder').select('svg')
+        svg
+        .append("line")
+        .classed('line',true)
+        .attr("x1", '0%')
+        .attr("x2", '20%')
+        .attr("y1", '0%')
+        .attr("y2", "20%")
+        svg
+        .append("line")
+        .classed('line',true)
+        .attr("x1", '20%')
+        .attr("x2", '40%')
+        .attr("y1", '20%')
+        .attr("y2", "20%")
+        svg
+        .append("line")
+        .classed('line',true)
+        .attr("x1", '40%')
+        .attr("x2", '20%')
+        .attr("y1", '20%')
+        .attr("y2", "60%")
+        svg
+        .append("line")
+        .classed('line',true)
+        .attr("x1", '20%')
+        .attr("x2", '80%')
+        .attr("y1", '60%')
+        .attr("y2", "40%")
+        svg
+        .append("line")
+        .classed('line',true)
+        .attr("x1", '80%')
+        .attr("x2", '80%')
+        .attr("y1", '40%')
+        .attr("y2", "80%")
+        svg
+        .append("line")
+        .classed('line',true)
+        .attr("x1", '80%')
+        .attr("x2", '100%')
+        .attr("y1", '80%')
+        .attr("y2", "100%")
         break;
         case "H":
         card.append('div').classed('textureborder',true).append('svg').classed('resvg',true)
@@ -279,7 +477,6 @@ function resetGrid(){
         .attr("x2", '50%')
         .attr("y1", '25%')
         .attr("y2", "75%")
-
         svg.append("line")
         .classed('line',true)
         .attr("x1", '75%')
@@ -292,7 +489,36 @@ function resetGrid(){
         inBox.append('div').classed('arrow3',true).html(arrow)
         break;
         case "I":
-        card.append('div').classed('textureborder',true)
+        card.append('div').classed('textureborder',true).append('svg').classed('resvg',true)
+        svg=d3.select('.'+cardNum).select('.textureborder').select('svg')
+        svg
+        .append("line")
+        .classed('line',true)
+        .attr("x1", '0%')
+        .attr("x2", '30%')
+        .attr("y1", '0%')
+        .attr("y2", "100%")
+        svg
+        .append("line")
+        .classed('line',true)
+        .attr("x1", '0%')
+        .attr("x2", '100%')
+        .attr("y1", '0%')
+        .attr("y2", "30%")
+        svg
+        .append("line")
+        .classed('line',true)
+        .attr("x1", '100%')
+        .attr("x2", '30%')
+        .attr("y1", '30%')
+        .attr("y2", "100%")
+        svg
+        .append("line")
+        .classed('line',true)
+        .attr("x1", '100%')
+        .attr("x2", '65%')
+        .attr("y1", '100%')
+        .attr("y2", "65%")
         break;
       }//end of switch
     backSpread.splice(0,1)
