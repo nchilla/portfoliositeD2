@@ -17,7 +17,7 @@
   height:100vh;
   display: flex;
   flex-direction:column;
-  position:fixed;
+  position:relative;
   flex-wrap:nowrap;
 }
 .row{
